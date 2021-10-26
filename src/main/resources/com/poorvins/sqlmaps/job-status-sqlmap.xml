@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserProfile">
+
+	<resultMap type="com.poorvins.models.UserProfile" id="userProfile">
+		<result property="seqId" column="seq_id" />
+		<result property="firstName" column="first_name" />
+		<result property="lastName" column="last_name" />
+		<result property="emailAddress" column="email_addresss" />
+		<result property="password" column="password" />
+	</resultMap>
+	
+	<resultMap type="com.poorvins.models.ForgotPassword" id="forgotPassword">
+		<result property="seqId" column="seq_id" />
+		<result property="emailAddress" column="email_addresss" />
+	</resultMap>
+
+	<select id="getProfileForEmailAddress" resultMap="userProfile">
+		SELECT
+			seq_id,
+			first_name,
+			last_name,
+			email_address,
+			password
+		FROM
+			users
+		WHERE
+			email_address=#{emailAddress}			
+	
+	</select>
+	
+	
+	<insert id="createProfile" parameterType="UserProfile">
+		INSERT INTO
+			users
+			(seq_id, first_name, last_name, email_address, password)
+		VALUES
+			(UUID_SHORT(),#{firstName},#{lastName},#{emailAddress},#{password})
+	</insert>
+	
+	<insert id="createForgotPasswordRecord" parameterType="ForgotPassword">
+		INSERT INTO
+			forgot_password
+			(seq_id, email_address)
+		VALUES
+			(UUID_SHORT(),#{emailAddress})
+	</insert>
+	
+	<select id="getForgottenPasswordRecordForEmailAddress" resultMap="forgotPassword">
+		SELECT
+			seq_id,
+			email_address
+		FROM
+			forgot_password
+		WHERE
+			email_address=#{emailAddress}
+		LIMIT 1		
+	
+	</select>
+	
+	<update id="resetPassword" parameterType="ForgotPassword">
+		UPDATE
+			users
+		SET
+			password=#{newPassword}
+		WHERE
+			email_address=#{emailAddress}
+	</update>
+	
+	<delete id="deleteForgotPasswordRecord"  parameterType="ForgotPassword">
+		DELETE FROM 
+			forgot_password
+		WHERE
+			email_address=#{emailAddress}
+	</delete>
+	
+	
+
+</mapper>
