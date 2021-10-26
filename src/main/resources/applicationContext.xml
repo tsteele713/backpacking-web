@@ -42,7 +42,11 @@
 		<property name="mapperLocations" value="classpath*:com/poorvins/sqlmaps/*.xml" />
 	</bean>
 	
-		<bean id="userProfileDao" class="com.poorvins.daos.UserProfileDaoImpl">
+	<bean id="userProfileDao" class="com.poorvins.daos.UserProfileDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="parksDao" class="com.poorvins.daos.ParksDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
  

@@ -30,7 +30,7 @@ import com.poorvins.services.UserProfileService;
 import com.poorvins.validators.UserProfileValidator;
 
 @Component
-@Qualifier(Constants.Qualifiers.CONTROLLER)
+@Qualifier(Constants.Qualifiers.USERS_CONTROLLER)
 @Path(Constants.Endpoints.USERS_ENDPOINT)
 public class UserProfileController {
 	

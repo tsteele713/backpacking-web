@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Parks">
+
+	<resultMap type="com.poorvins.models.Park" id="park">
+		<result property="seqId" column="seq_id" />
+		<result property="parkName" column="park_name" />
+		<result property="parkState" column="park_state" />
+		<result property="parkType" column="park_type" />
+	</resultMap>
+
+	<select id="getAllParks" resultMap="park">
+		SELECT
+			seq_id,
+			park_name,
+			park_state,
+			park_type
+		FROM
+			parks
+
+	</select>
+
+	<select id="getAllParksForState" resultMap="park">
+		SELECT
+			seq_id,
+			park_name,
+			park_state,
+			park_type
+		FROM
+			parks
+		WHERE
+			LOWER(park_state)=#{state}
+
+	</select>
+
+	<select id="getAllParksForType" resultMap="park" parameterType="hashmap">
+		SELECT
+			seq_id,
+			park_name,
+			park_state,
+			park_type
+		FROM
+			parks
+		<if test="state != null || type != null">
+			WHERE
+		</if>
+		<if test="type != null">
+			LOWER(park_type)=#{type}
+		</if>
+		<if test="state != null and type != null">
+		 	AND
+		</if>
+		<if test="state != null">
+			LOWER(park_state)=#{state}
+		</if>
+
+	</select>
+
+</mapper>

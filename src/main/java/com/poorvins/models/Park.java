@@ -3,34 +3,41 @@ package com.poorvins.models;
 public class Park {
 	
 	private String seqId;
-	private String name;
-	private String state;
-	
+	private String parkName;
+	private String parkState;
+	private String parkType;
 	public String getSeqId() {
 		return seqId;
 	}
 	public void setSeqId(String seqId) {
 		this.seqId = seqId;
 	}
-	public String getName() {
-		return name;
+	public String getParkName() {
+		return parkName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
 	}
-	public String getState() {
-		return state;
+	public String getParkState() {
+		return parkState;
 	}
-	public void setState(String state) {
-		this.state = state;
+	public void setParkState(String parkState) {
+		this.parkState = parkState;
+	}
+	public String getParkType() {
+		return parkType;
+	}
+	public void setParkType(String parkType) {
+		this.parkType = parkType;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
+		result = prime * result + ((parkState == null) ? 0 : parkState.hashCode());
+		result = prime * result + ((parkType == null) ? 0 : parkType.hashCode());
 		result = prime * result + ((seqId == null) ? 0 : seqId.hashCode());
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
 	@Override
@@ -42,28 +49,32 @@ public class Park {
 		if (getClass() != obj.getClass())
 			return false;
 		Park other = (Park) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (parkName == null) {
+			if (other.parkName != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!parkName.equals(other.parkName))
+			return false;
+		if (parkState == null) {
+			if (other.parkState != null)
+				return false;
+		} else if (!parkState.equals(other.parkState))
+			return false;
+		if (parkType == null) {
+			if (other.parkType != null)
+				return false;
+		} else if (!parkType.equals(other.parkType))
 			return false;
 		if (seqId == null) {
 			if (other.seqId != null)
 				return false;
 		} else if (!seqId.equals(other.seqId))
 			return false;
-		if (state == null) {
-			if (other.state != null)
-				return false;
-		} else if (!state.equals(other.state))
-			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Park [seqId=" + seqId + ", name=" + name + ", state=" + state + "]";
+		return "Park [seqId=" + seqId + ", parkName=" + parkName + ", parkState=" + parkState + ", parkType=" + parkType
+				+ "]";
 	}
 	
-	
-
 }
